@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: kcare
+    
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 8640000
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  mvc:
+    static-path-pattern: /uploads/**
+    # contentnegotiation:
+    #   favor-parameter: true
+    #   media-types:
+    #     json: application/json
+  web:
+    resources:
+      static-locations: file:./uploads/
+    
+  datasource:
+    url: jdbc:postgresql://ep-divine-king-a4p3jg6b.us-east-1.aws.neon.tech/neondb?sslmode=require
+    username: neondb_owner  
+    password: NTmr8fB7Vcdh  
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: Avichalllkumar@gmail.com
+    password: rkpukcnurzeoigzd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            require: true
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: myGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties: 
+        spring:
+          json:
+            trusted.packages: '*'
+            type.mapping: kafkaProductIssueResponse:com.kcare.kcare.Product.controller.ProductIssueController.KafkaProductIssueResponse,productUsageNotification:com.kcare.kcare.Product.controller.ConsumableProductUsageController.ProductUsageNotification
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+    # consumer.value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    # consumer.properties:
+    #   spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      # value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties: 
+        spring.json.type.mapping:
+          kafkaProductIssueResponse: com.kcare.kcare.Product.controller.ProductIssueController.KafkaProductIssueResponse,productUsageNotification:com.kcare.kcare.Product.controller.ConsumableProductUsageController.ProductUsageNotification
+
+server:
+  servlet:
+    context-path: /api/v1/
+  port: 9090
+
+file:
+  uploads:
+    photos-output-path: ./uploads
+
+sandbox:
+  api:  
+    key: key_live_yMHJkJwl6ReU1tnsYBwuAf9ehfaSb9iv
+    version: 1.0 
+
+  eway:
+    bill:
+      token: 
+imageKit:
+  api:
+    public-key: public_JKReicDFLPv29N0hHq6kvdUU0j0=
+  
+cloudflare:
+  r2:
+    access-key-id: 6a72f90f33f5a0addca461fa30813167
+    secret-access-key: 2692950e5a92e5d694ad1babd99e86f420c6d1132b15f76a0c9b455e2412c6d3
+    endpoint: https://736d8a1744fd4b189276849ec023874a.r2.cloudflarestorage.com
+    bucket-name: kcare
+    domain-name: bucket.avichal.pro
+    

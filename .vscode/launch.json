@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ssd",
+            "request": "launch",
+            "mainClass": "ssd",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-KcareApplication<kcare>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kcare.kcare.KcareApplication",
+            "projectName": "kcare",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
